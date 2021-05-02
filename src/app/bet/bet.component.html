@@ -1,6 +1,5 @@
-<div class="flex flex-col justify-evenly  h-96 my-8 w-full bg-gray-800 ">
-    <span  class="text-white">{{bet.value}}</span>
-    <input  class="appearance-none mx-2 h-8" type="number">
+<div class="flex flex-col justify-evenly h-20 md:h-96 md:my-8 w-full bg-gray-800 pb-4">
+    <input  class="appearance-none mx-2 py-2 px-1 my-1 h-8 font-mono" type="number">
     <button *ngIf="bet.value==0" class="bg-green-400 h-16 w-auto mx-2 text-green-800 text-2xl rounded" (click)="onMise()">
         Miser
     </button>
@@ -8,4 +7,4 @@
         Retrait
     </button>
 </div>
-<div *ngFor="let bet of bets" class="text-white">{{bet.value}}</div>
+<!--<div *ngFor="let bet of bets" class="text-white">{{bet.value}}</div> -->
