@@ -7,10 +7,13 @@ import { AppComponent } from './app.component';
 import { BetComponent } from './bet/bet.component';
 import { GraphicsComponent } from './graphics/graphics.component';
 import { ChatComponent } from './chat/chat.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 
 @NgModule({
   declarations: [AppComponent, BetComponent, GraphicsComponent, ChatComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule,SocketIoModule.forRoot(config)],
   providers: [],
   bootstrap: [AppComponent],
 })
