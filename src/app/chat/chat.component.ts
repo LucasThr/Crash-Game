@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from '../chat.service';
 import { UserService } from '../user.service'
+import { Userchat } from '../userchat'
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -9,7 +10,8 @@ import { UserService } from '../user.service'
 export class ChatComponent implements OnInit {
   msg = 'First Protocol';
   newMessage!: string
-  messageList: string[] = [];
+  messageUser!:Userchat
+  messageList: Userchat[] = [];
   user!:string
   constructor(
     // @ViewChild('chat') private myScrollContainer: ElementRef,
@@ -37,14 +39,15 @@ export class ChatComponent implements OnInit {
   sendMessage() {
     if(!this.newMessage)return
     console.log(this.newMessage);
-    this.chatService.sendChat(this.newMessage);
+    this.messageUser={username:this.userService.user,message:this.newMessage}
+    this.chatService.sendChat(this.messageUser);
     this.newMessage=""
   }
 
   ngOnInit(): void {
     this.chatService.chat.subscribe((message) => {
       console.log('message recu');
-      this.messageList.push(message);
+      this.messageList.push(this.messageUser);
       this.chatService.getChats(this.messageList);
     });
     this.chatService.chats.subscribe((messages) => {

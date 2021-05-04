@@ -2,7 +2,7 @@
   <h3 class="">CHAT</h3>
   <div #chat class="overflow-auto h-64 w-auto overscroll-auto">
     <div class="my-2" *ngFor="let message of messageList">
-      <div class="h-2 rounded w-auto text-gray-400">{{userService.user}} : {{ message }}</div>
+      <div class="h-2 rounded w-auto text-gray-400">{{message.username}} : {{ message.message }}</div>
     </div>
   </div>
   <div class="flex flex-row h-8 ">
