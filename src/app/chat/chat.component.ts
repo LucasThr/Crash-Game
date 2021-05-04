@@ -22,13 +22,22 @@ export class ChatComponent implements OnInit {
       this.chatService.sendChat(this.newMessage);
       // console.log(this.messageList)
     }
+    save(){
+      this.chatService.save()
+    }
 
   ngOnInit(): void {
     // this.chatService.getEventListener().subscribe(() => console.log(123));
     this.chatService.chat
       .subscribe((message) => {
-        // console.log('message recu')
+        console.log('message recu')
         this.messageList.push(message);
+        this.chatService.getChats(this.messageList)
+      });
+      this.chatService.chats
+      .subscribe((message) => {
+        console.log('message recu !')
+        this.messageList=message
       });
     // this.sendMsg(this.msg);
     this.chatService.getMessage().subscribe(msg => {

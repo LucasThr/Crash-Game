@@ -25,9 +25,13 @@ io.on('connection', socket => {
    
         
         socket.on('getChat', msg => {
-          console.log('socket ok' )
+          console.log('socket ok 1 ' )
           socket.emit('chat', msg);
         });
+        socket.on('getChats', msg => {
+            console.log('socket ok 2' )
+            io.emit('chats', msg);
+          }); 
       
 });
 
