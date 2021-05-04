@@ -1,6 +1,6 @@
 <div class="h-screen w-full">
   <h3 class="mx-20">CHAT</h3>
-  <button (click)=send()>send</button>
+  <button (click)=test()>send</button>
   <div class="w-full mx-32">
     <div class="h-8 w-full">
       <div class="h-8 rounded w-3/12 bg-white"></div>
@@ -9,4 +9,10 @@
     <div class="h-8 w-full">d</div>
     <div class="h-8 w-full">d</div>
   </div>
+</div>
+
+<input [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && sendMessage()" />
+<button (click)="sendMessage()">Send Message</button>
+<div *ngFor="let message of messageList">
+  {{message}}
 </div>
