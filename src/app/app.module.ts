@@ -9,7 +9,8 @@ import { GraphicsComponent } from './graphics/graphics.component';
 import { ChatComponent } from './chat/chat.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
+// const config: SocketIoConfig = { url: 'http://192.68.43.185:3000', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [AppComponent, BetComponent, GraphicsComponent, ChatComponent],

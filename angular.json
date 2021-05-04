@@ -30,6 +30,9 @@
             "styles": [
               "src/styles.css"
             ],
+            "allowedCommonJsDependencies": [
+              "socket.io-client"
+           ],
             "scripts": []
           },
           "configurations": {

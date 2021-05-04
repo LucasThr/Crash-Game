@@ -12,10 +12,16 @@ export class ChatComponent implements OnInit {
   ) { }
 
     send(){
-      this.chatService.sendMessage("ok")
+      this.chatService.sendMessage()
     }
 
+
   ngOnInit(): void {
+    this.chatService.getEventListener().subscribe(() => console.log(123));
+    this.chatService.getMessage().subscribe(msg => {
+        console.log('Incoming msg');
+      });
+
   }
 
 }
