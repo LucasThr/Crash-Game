@@ -13,21 +13,13 @@ export class ChatComponent implements OnInit {
     private chatService:ChatService
   ) { }
 
-    // send(){
-    //   this.chatService.sendMessage()
-    // }
-
     sendMessage() {
       console.log(this.newMessage)
       this.chatService.sendChat(this.newMessage);
-      // console.log(this.messageList)
-    }
-    save(){
-      this.chatService.save()
     }
 
+
   ngOnInit(): void {
-    // this.chatService.getEventListener().subscribe(() => console.log(123));
     this.chatService.chat
       .subscribe((message) => {
         console.log('message recu')
@@ -35,20 +27,14 @@ export class ChatComponent implements OnInit {
         this.chatService.getChats(this.messageList)
       });
       this.chatService.chats
-      .subscribe((message) => {
+      .subscribe((messages) => {
         console.log('message recu !')
-        this.messageList=message
-      });
-    // this.sendMsg(this.msg);
-    this.chatService.getMessage().subscribe(msg => {
-        console.log('Incoming msg');
+        this.messageList=messages
       });
 
   }
 
 
-  test() {
-    console.log(this.messageList);
- }
+  
 
 }

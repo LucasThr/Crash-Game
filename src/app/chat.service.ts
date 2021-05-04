@@ -11,14 +11,6 @@ export class ChatService {
   chats =  this.socket.fromEvent<string[]>('chats');
   constructor(private socket: Socket) {}
 
-  public save(){
-    console.log(this.chats)
-  }
-
-  public getMessage() {
-    return this.socket.fromEvent<any>('msg').pipe(map((data) => data.msg));
-  }
- 
   public sendChat(msg:string){
     console.log("good")
     this.socket.emit('getChat',msg)
@@ -26,37 +18,6 @@ export class ChatService {
 
   public getChats(msg:string[]){
     this.socket.emit('getChats',msg)
-    this.save()
   }
 
-  public sendMessage(message:string) {
-    console.log("ok")
-    this.socket.emit('new-message', message);
-}
-
-
-  
-
-  time = new Observable<string>(observer => {
-    this.socket.on('new-message', (message:string) => {
-      observer.next(message);
-      console.log("time")
-  });
-  });
-
-  public getMessages = () => {
-    return this.time
-}
-
-  public getEventListener() {
-    return this.socket.fromEvent('welcome');
-  }
-
-  // public getMessages = () => {
-  //   return Observable.create((observer) => {
-  //           this.socket.on('new-message', (message) => {
-  //               observer.next(message);
-  //           });
-  //   });
-  // }
 }
