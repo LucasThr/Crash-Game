@@ -10,9 +10,8 @@ export class ChatService {
   chat = this.socket.fromEvent<string>('chat');
   chats =  this.socket.fromEvent<string[]>('chats');
   constructor(private socket: Socket) {}
-
+  
   public sendChat(msg:string){
-    console.log("good")
     this.socket.emit('getChat',msg)
   }
 

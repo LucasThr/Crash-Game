@@ -1,16 +1,17 @@
 <div class="flex-1 h-64 w-full pr-8">
   <h3 class="">CHAT</h3>
-  <div #chat class="overflow-auto h-64 w-auto mx-4  overscroll-auto  ">
+  <div #chat class="overflow-auto h-64 w-auto overscroll-auto">
     <div class="my-2" *ngFor="let message of messageList">
-      <div class="h-8 rounded w-auto bg-white "> {{ message }}
-      </div>
+      <div class="h-2 rounded w-auto text-gray-400">{{userService.user}} : {{ message }}</div>
     </div>
+  </div>
+  <div class="flex flex-row h-8 ">
+    <input
+      class="py-1 px-2 appearance-none h-8 w-2/3 rounded-l border-r-2 border-gray-600"
+      [(ngModel)]="newMessage"
+      (keyup)="$event.keyCode == 13 && sendMessage()"
+    />
+    <button class="w-1/3 bg-gray-100 h-8 rounded-r" (click)="sendMessage()">Envoyer</button>
 
   </div>
-  <input
-  [(ngModel)]="newMessage"
-  (keyup)="$event.keyCode == 13 && sendMessage()"
-/>
-<button (click)="sendMessage()">Send Message</button>
-
 </div>

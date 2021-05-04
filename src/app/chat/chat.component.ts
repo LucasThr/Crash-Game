@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from '../chat.service';
+import { UserService } from '../user.service'
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -7,13 +8,19 @@ import { ChatService } from '../chat.service';
 })
 export class ChatComponent implements OnInit {
   msg = 'First Protocol';
-  newMessage: string = 'MESSAGE';
+  newMessage!: string
   messageList: string[] = [];
+  user!:string
   constructor(
-  //   @ViewChild('chat') private myScrollContainer: ElementRef,
+    // @ViewChild('chat') private myScrollContainer: ElementRef,
 
-    private chatService: ChatService
+    private chatService: ChatService,
+    public userService: UserService
   ) {}
+
+  setUser(name:string){
+    this.userService.setName(name)
+  }
 
   // name = 'Angular';
 
@@ -28,8 +35,10 @@ export class ChatComponent implements OnInit {
   // }
 
   sendMessage() {
+    if(!this.newMessage)return
     console.log(this.newMessage);
     this.chatService.sendChat(this.newMessage);
+    this.newMessage=""
   }
 
   ngOnInit(): void {
