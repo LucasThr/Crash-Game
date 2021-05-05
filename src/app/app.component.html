@@ -1,15 +1,19 @@
-<div  class="min-h-screen h-auto w-full bg-gray-700">
-  <h1 class="text-4xl text-white font-mono uppercase font-bold text-center md:text-left mb-4 md:pl-8 pt-8">Crash Game</h1> 
-    <!-- <app-bet class="w-full md:w-96"></app-bet> -->
-    <div class="md:flex">
+<div *ngIf="userService.user" class="min-h-screen h-auto w-full bg-gray-700">
+  <h1
+    class="text-4xl text-white font-mono uppercase font-bold text-center md:text-left mb-4 md:pl-8 pt-8"
+  >
+    Crash Game
+  </h1>
+  <!-- <app-bet class="w-full md:w-96"></app-bet> -->
+  <div class="md:flex">
     <app-graphics class="w-9/12"></app-graphics>
     <app-chat class="w-3/12"></app-chat>
   </div>
-  </div>
-  <!-- <div *ngIf="!userService.user" class="flex flex-col justify-center items-center h-screen w-full bg-gray-700">
+</div>
+<div *ngIf="!userService.user" class="flex flex-col justify-center items-center h-screen w-full bg-gray-700">
     <div class="text-xl text-white font-bold mb-6"> Entrer votre pseudo</div>
     <input
     class="py-1 px-2 appearance-none h-8 w-2/3 rounded-l border-r-2 border-gray-600"
     [(ngModel)]="user"
     (keyup)="$event.keyCode == 13 && setName()"  />    
-  </div>  -->
+  </div> 

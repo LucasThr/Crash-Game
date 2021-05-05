@@ -6,28 +6,45 @@
     <div class="flex md:flex-col w-auto">
       <input
         [(ngModel)]="mise"
+        *ngIf="canBet"
+
         min="0"
         class="appearance-none w-1/2 focus:outline-none  border focus:border-green-600 md:w-auto mx-2 py-2 px-1 md:my-1 h-10 font-mono rounded"
         type="number"
       />
-
+      <input
+        [(ngModel)]="mise"
+        *ngIf="!canBet"
+        readonly
+        
+        min="0"
+        class="appearance-none w-1/2 focus:outline-none  border focus:border-green-600 md:w-auto mx-2 py-2 px-1 md:my-1 h-10 font-mono rounded"
+        type="number"
+      />
       <button
-        *ngIf="canBet || time == 1.0"
+        *ngIf="canBet && !this.miseOnTable"
         class="bg-green-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded inset-0"
         (click)="onMise()"
       >
         Miser
       </button>
       <button
-        *ngIf="!canBet && time != 1.0 && !isWithdraw && mise"
-        class="bg-green-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded"
+      *ngIf="canBet && this.miseOnTable"
+      class="bg-green-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded inset-0"
+      (click)="cancelMise()"
+    >
+      Annuler
+    </button>
+      <button
+        *ngIf="!canBet && this.miseOnTable"
+        class="bg-blue-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded"
         (click)="onRetrait()"
       >
-        Retrait
+      Retrait
       </button>
       <button
-      *ngIf="!canBet && time != 1.0 && !mise"
-      class="bg-green-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded"
+      *ngIf="!canBet && !this.miseOnTable"
+      class="bg-indigo-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded"
     >
       En attente
     </button>
@@ -37,8 +54,8 @@
   <div
     class="flex justify-center items-center h-64 md:h-64 w-full rounded-t md:my-8 bg-gray-800 md:border-l-2 border-gray-600"
   >
-    <div *ngIf="!isCrash" class="text-6xl text-white">x{{ time }}</div>
-    <div *ngIf="isCrash" class="text-6xl text-red-500">x{{ time }}</div>
+    <div *ngIf="!canBet" class="text-6xl text-white">x{{ time }}</div>
+    <div *ngIf="canBet" class="text-6xl text-red-500">x{{ time }}</div>
   </div>
 </div>
 <div class="mx-12 w-auto mt-3 md:mx-20 bg-gray-800 py-3">

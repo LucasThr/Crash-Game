@@ -4,7 +4,6 @@ import { Bet } from '../bet';
 import { BetRecord } from '../bet';
 import { Socket } from 'ngx-socket-io';
 import { BetsService } from '../bets.service';
-import { interval } from 'rxjs';
 @Component({
   selector: 'app-graphics',
   templateUrl: './graphics.component.html',
@@ -20,64 +19,19 @@ export class GraphicsComponent implements OnInit {
   timer!: number;
   isCrash: boolean = false;
   isWithdraw: boolean = false;
+  miseOnTable:number=0;
   constructor(public betService:BetsService) {
     this.time = 1.0;
-    // this.socket.on('test',(message:string="ok") => {
-    //   console.log("ok")
-    // })
   }
-
- 
-  start() {
-    var crash: number;
-    var max: number;
-    this.isWithdraw = false;
-    max = (Math.floor(Math.random() * (500 - 0) + 0) / 100) * 100;
-    this.timer = window.setInterval(() => {
-      if (this.time > 0 && this.time < 2) {
-        this.time = Number(
-          Number(Math.round((this.time += 0.01) * 100) / 100).toFixed(2)
-        );
-      }
-      if (this.time < 5 && this.time >= 2) {
-        this.time = Number(
-          Number(Math.round((this.time += 0.04) * 100) / 100).toFixed(2)
-        );
-
-        max = max / 2;
-      }
-      if (this.time < 100 && this.time >= 5) {
-        this.time = Number(
-          Number(Math.round((this.time += 0.08) * 100) / 100).toFixed(2)
-        );
-        max = max / 2;
-      }
-      crash = (Math.floor(Math.random() * (max - 1) + 1) / 100) * 100;
-      console.log(crash);
-      if (crash == 1) {
-        clearTimeout(this.timer);
-        this.isCrash = true;
-        if(!this.isWithdraw){
-        this.addBet(this.mise, this.time,true);
-        }
-      }
-    }, 100);
-  }
-
-  stop() {
-    clearTimeout(this.timer);
-  }
-
+  
 
   onMise(): void {
-    // this.secondsCounter.subscribe()
-    this.betService.start()
     if (!this.mise) return;
     if((this.money-this.mise)<0) return;
     this.money=this.fixedDecimal(this.money- this.mise);
+    this.miseOnTable=this.mise
     this.isCrash = false;
     this.time = 1.0;
-    // this.start();
   }
 
   addMoney(time: number) {
@@ -91,11 +45,16 @@ export class GraphicsComponent implements OnInit {
   }
 
   onRetrait(): void {
-    if (!this.mise) return;
+    if (!this.miseOnTable) return;
     this.isWithdraw = true;
     console.log('RETRAIT');
     this.addMoney(this.time);
     this.addBet(this.mise, this.time);
+  }
+
+  cancelMise(){
+    this.money+=this.miseOnTable
+    this.miseOnTable=0
   }
 
   fixedDecimal(number: number): number {
@@ -110,7 +69,48 @@ export class GraphicsComponent implements OnInit {
     
     this.betService.canBet.subscribe((canBet) => {
       this.canBet=canBet
+      if(this.canBet==true){
+        this.miseOnTable=0
+      }
     });
     
   }
 }
+
+
+
+// start() {
+//   var crash: number;
+//   var max: number;
+//   this.isWithdraw = false;
+//   max = (Math.floor(Math.random() * (500 - 0) + 0) / 100) * 100;
+//   this.timer = window.setInterval(() => {
+//     if (this.time > 0 && this.time < 2) {
+//       this.time = Number(
+//         Number(Math.round((this.time += 0.01) * 100) / 100).toFixed(2)
+//       );
+//     }
+//     if (this.time < 5 && this.time >= 2) {
+//       this.time = Number(
+//         Number(Math.round((this.time += 0.04) * 100) / 100).toFixed(2)
+//       );
+
+//       max = max / 2;
+//     }
+//     if (this.time < 100 && this.time >= 5) {
+//       this.time = Number(
+//         Number(Math.round((this.time += 0.08) * 100) / 100).toFixed(2)
+//       );
+//       max = max / 2;
+//     }
+//     crash = (Math.floor(Math.random() * (max - 1) + 1) / 100) * 100;
+//     console.log(crash);
+//     if (crash == 1) {
+//       clearTimeout(this.timer);
+//       this.isCrash = true;
+//       if(!this.isWithdraw){
+//       this.addBet(this.mise, this.time,true);
+//       }
+//     }
+//   }, 100);
+// }
