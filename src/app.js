@@ -24,15 +24,14 @@ io.on("connection", (socket) => {
     io.emit("canBet", false);
     var crash;
     var max;
-    time = 1;
+    time = 1.00;
     console.log("start");
     isWithdraw = false;
     max = (Math.floor(Math.random() * (1000 - 0) + 0) / 100) * 100;
     timer = setInterval(() => {
 
       if (time > 0 && time < 2) {
-        time = Number(
-          Number(Math.round((time += 0.01) * 100) / 100).toFixed(2)
+        time = Number(Number(Math.round((time += 0.01) * 100) / 100).toFixed(2)
         );
 		divide = (Math.floor(Math.random() * (12 - 10) + 10) / 100) * 10;
 

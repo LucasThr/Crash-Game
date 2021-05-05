@@ -23,8 +23,9 @@ export class GraphicsComponent implements OnInit {
   readyToPlay!:boolean;
   chronoBar!:number;
   barLenght!:number
+  timeToShow:string='1.00'
   constructor(public betService: BetsService) {
-    this.time = 1.0;
+    this.time = 1.00;
   }
 
   onMise(): void {
@@ -74,6 +75,8 @@ export class GraphicsComponent implements OnInit {
   ngOnInit(): void {
     this.betService.time.subscribe((time) => {
       this.time = time;
+      this.timeToShow=time.toString()
+      this.timeToShow=Number.parseFloat(this.timeToShow).toFixed(2)
     });
     this.betService.readyToPlay.subscribe((verify) => {
       this.readyToPlay = verify;
@@ -88,6 +91,7 @@ export class GraphicsComponent implements OnInit {
       }
       if (this.canBet == false) {
         clearInterval(this.chronoBar)
+        this.barLenght=0
       }
     });
   }
