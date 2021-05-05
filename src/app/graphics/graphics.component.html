@@ -54,8 +54,8 @@
   <div
     class="flex justify-center items-center h-64 md:h-64 w-full rounded-t md:my-8 bg-gray-800 md:border-l-2 border-gray-600"
   >
-    <div *ngIf="!canBet" class="text-6xl text-white">x{{ time }}</div>
-    <div *ngIf="canBet" class="text-6xl text-red-500">x{{ time }}</div>
+    <div *ngIf="!canBet" class="font-mono text-6xl text-white">x{{ time }}</div>
+    <div *ngIf="canBet" class="font-mono text-6xl text-red-500">x{{ time }}</div>
   </div>
 </div>
 <div class="mx-12 w-auto mt-3 md:mx-20 bg-gray-800 py-3">

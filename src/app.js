@@ -62,7 +62,7 @@ io.on("connection", (socket) => {
       console.log(crash);
       io.emit("timer", time);
 
-      if (crash == 1 || time == 0) {
+      if (crash == 1 || crash == 0) {
         clearTimeout(timer);
         io.emit("canBet", true);
         waitForNext();
