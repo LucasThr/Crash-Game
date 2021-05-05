@@ -6,7 +6,14 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class BetsService {
+  time = this.socket.fromEvent<number>('timer');
+
   constructor(public socket: Socket) {}
+
+
+
+
+
   getMessage() {
     console.log("g")
     this.socket.on('msg',() =>{

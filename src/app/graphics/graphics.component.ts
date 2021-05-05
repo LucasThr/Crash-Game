@@ -19,7 +19,7 @@ export class GraphicsComponent implements OnInit {
   timer!: number;
   isCrash: boolean = false;
   isWithdraw: boolean = false;
-  constructor(private betService:BetsService) {
+  constructor(public betService:BetsService) {
     this.time = 1.0;
     // this.socket.on('test',(message:string="ok") => {
     //   console.log("ok")
@@ -67,24 +67,6 @@ export class GraphicsComponent implements OnInit {
     clearTimeout(this.timer);
   }
 
-   MyObservable:Observable<any> = of(1, 2, 3);
-
-  // Create observer object
-  // myObserver:Observable<string> = {
-  //   next: x => console.log('Observer got a next value: ' + x),
-  //   error: err => console.error('Observer got an error: ' + err),
-  //   complete: () => console.log('Observer got a complete notification'),
-  // };
-
-  // // Execute with the observer object
-  // myObservable.subscribe(myObserver);
-
-
-// Create an Observable that will publish a value on an interval
-  //  secondsCounter = interval(1000);
-  // Subscribe to begin publishing values
-  //  subscription = this.secondsCounter.subscribe(n =>
-  //   console.log(`It's been ${n + 1} seconds since subscribing!`));
 
   onMise(): void {
     // this.secondsCounter.subscribe()
@@ -121,10 +103,9 @@ export class GraphicsComponent implements OnInit {
 
   
   ngOnInit(): void {
-    this.betService
-        .getMessage()
-        // .subscribe(msg => {
-        //   console.log('Incoming msg', msg);
-        // });
+    this.betService.time.subscribe((time) => {
+      console.log('message recu !');
+      this.time=time
+    });
   }
 }
