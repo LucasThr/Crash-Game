@@ -10,19 +10,25 @@ const io = socketIO(server, {
     origin: "*",
   },
 });
+console.log('PROBLEME')
+var timer;
 
 const port = process.env.PORT || 3000;
 // const port = 3000;
-
+var isPlaying=false
 io.on("connection", (socket) => {
+
+	console.log("user connected");
+
+	//Start Chrono 
 	start = () => {
+		io.emit("canBet", false)
 		var crash;
 		var max;
 		time = 1;
-		var timer;
 		console.log("start");
 		isWithdraw = false;
-		max = (Math.floor(Math.random() * (500 - 0) + 0) / 100) * 100;
+		max = (Math.floor(Math.random() * (1000 - 0) + 0) / 100) * 100;
 		timer = setInterval(() => {
 		  if (time > 0 && time < 2) {
 			time = Number(
@@ -44,12 +50,15 @@ io.on("connection", (socket) => {
 			max = max / 2;
 		  }
 		  console.log(time);
+
 		  crash = (Math.floor(Math.random() * (max - 1) + 1) / 100) * 100;
 		  console.log(crash);
 		  io.emit("timer", time);
 	
 		  if (crash == 1 || time==0) {
 			clearTimeout(timer);
+			io.emit("canBet", true)
+			waitForNext()
 			isCrash = true;
 			if (!isWithdraw) {
 			  // addBet(mise, time,true);
@@ -57,17 +66,21 @@ io.on("connection", (socket) => {
 		  }
 		}, 100);
 	  };
-	
-	  stop = () => {
-		clearTimeout(timer);
-	  };
-  console.log("user connected");
-  socket.emit("welcome");
+	  if(timer==undefined){
+	  start()
+	  }
+	  waitForNext = () => {
+		  console.log(timer)
+		  setTimeout(() => {
+			start()
+		}, 10000);
+	  } 
 
   //GAME
   // socket.emit('startGame')
-  start()
 
+
+ 
  
 
   //CHAT
@@ -84,3 +97,4 @@ io.on("connection", (socket) => {
 server.listen(port, () => {
   console.log(`started on port: ${port}`);
 });
+

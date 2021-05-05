@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class BetsService {
   time = this.socket.fromEvent<number>('timer');
-
+  canBet = this.socket.fromEvent<boolean>('canBet');
   constructor(public socket: Socket) {}
 
 

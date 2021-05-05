@@ -12,21 +12,21 @@
       />
 
       <button
-        *ngIf="isCrash || time == 1.0"
+        *ngIf="canBet || time == 1.0"
         class="bg-green-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded inset-0"
         (click)="onMise()"
       >
         Miser
       </button>
       <button
-        *ngIf="!isCrash && time != 1.0 && !isWithdraw"
+        *ngIf="!canBet && time != 1.0 && !isWithdraw && mise"
         class="bg-green-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded"
         (click)="onRetrait()"
       >
         Retrait
       </button>
       <button
-      *ngIf="!isCrash && time != 1.0 && isWithdraw"
+      *ngIf="!canBet && time != 1.0 && !mise"
       class="bg-green-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded"
     >
       En attente

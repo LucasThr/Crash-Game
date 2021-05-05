@@ -14,6 +14,7 @@ export class GraphicsComponent implements OnInit {
   money: number = 100;
   mise!: number;
   bets: BetRecord[] = [];
+  canBet!:boolean
   // bet: Bet = { id: 1, value: 0 };
   time!: number;
   timer!: number;
@@ -76,7 +77,7 @@ export class GraphicsComponent implements OnInit {
     this.money=this.fixedDecimal(this.money- this.mise);
     this.isCrash = false;
     this.time = 1.0;
-    this.start();
+    // this.start();
   }
 
   addMoney(time: number) {
@@ -90,7 +91,7 @@ export class GraphicsComponent implements OnInit {
   }
 
   onRetrait(): void {
-    if (this.isWithdraw) return;
+    if (!this.mise) return;
     this.isWithdraw = true;
     console.log('RETRAIT');
     this.addMoney(this.time);
@@ -104,8 +105,12 @@ export class GraphicsComponent implements OnInit {
   
   ngOnInit(): void {
     this.betService.time.subscribe((time) => {
-      console.log('message recu !');
-      this.time=time
+    this.time=time
+  });
+    
+    this.betService.canBet.subscribe((canBet) => {
+      this.canBet=canBet
     });
+    
   }
 }
