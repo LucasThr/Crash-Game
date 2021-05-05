@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 var isPlaying = false;
 io.on("connection", (socket) => {
   console.log("user connected");
-
+  socket.emit('connected',true)
   //Start Chrono
   start = () => {
     io.emit("canBet", false);

@@ -13,35 +13,39 @@ export class GraphicsComponent implements OnInit {
   money: number = 100;
   mise!: number;
   bets: BetRecord[] = [];
-  canBet!:boolean
+  canBet!: boolean;
   // bet: Bet = { id: 1, value: 0 };
   time!: number;
   timer!: number;
   isCrash: boolean = false;
   isWithdraw: boolean = false;
-  miseOnTable:number=0;
-  constructor(public betService:BetsService) {
+  miseOnTable: number = 0;
+  readyToPlay!:boolean;
+  chronoBar!:number;
+  barLenght!:number
+  constructor(public betService: BetsService) {
     this.time = 1.0;
   }
-  
 
   onMise(): void {
     if (!this.mise) return;
-    if((this.money-this.mise)<0) return;
-    this.money=this.fixedDecimal(this.money- this.mise);
-    this.miseOnTable=this.mise
+    if (this.money - this.mise < 0) return;
+    this.money = this.fixedDecimal(this.money - this.mise);
+    this.miseOnTable = this.mise;
     this.isCrash = false;
-    this.time = 1.0;
   }
 
   addMoney(time: number) {
     // Number(this.money+= time * this.mise).toFixed(2);
-    this.money= Number((this.money+ time * this.mise).toFixed(2));
-
+    this.money = Number((this.money + time * this.mise).toFixed(2));
   }
 
-  addBet(initial: number, value: number,isLose?:boolean) {
-    this.bets.push({ initial: initial, value: value, gain: isLose ? 0 :this.fixedDecimal(initial * value)  });
+  addBet(initial: number, value: number, isLose?: boolean) {
+    this.bets.push({
+      initial: initial,
+      value: value,
+      gain: isLose ? 0 : this.fixedDecimal(initial * value),
+    });
   }
 
   onRetrait(): void {
@@ -52,32 +56,42 @@ export class GraphicsComponent implements OnInit {
     this.addBet(this.mise, this.time);
   }
 
-  cancelMise(){
-    this.money+=this.miseOnTable
-    this.miseOnTable=0
+  cancelMise() {
+    this.money += this.miseOnTable;
+    this.miseOnTable = 0;
   }
 
   fixedDecimal(number: number): number {
     return Number(number.toFixed(2));
   }
 
+  startChronoBar(){
+    this.chronoBar=window.setInterval(()=>{
+      this.barLenght-=1
+    },100)
+  }
   
   ngOnInit(): void {
     this.betService.time.subscribe((time) => {
-    this.time=time
-  });
-    
+      this.time = time;
+    });
+    this.betService.readyToPlay.subscribe((verify) => {
+      this.readyToPlay = verify;
+    });
+
     this.betService.canBet.subscribe((canBet) => {
-      this.canBet=canBet
-      if(this.canBet==true){
-        this.miseOnTable=0
+      this.canBet = canBet;
+      if (this.canBet == true) {
+        this.miseOnTable = 0;
+        this.barLenght=100
+        this.startChronoBar()
+      }
+      if (this.canBet == false) {
+        clearInterval(this.chronoBar)
       }
     });
-    
   }
 }
-
-
 
 // start() {
 //   var crash: number;

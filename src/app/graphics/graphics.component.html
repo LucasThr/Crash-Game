@@ -2,23 +2,23 @@
   <div
     class="flex flex-col h-auto md:h-64 md:my-8 w-auto md:justify-end md:w-64 bg-gray-800 pb-4"
   >
-    <div class="text-white text-xl md:mb-14 m-2 md:text-center pl-2">Argent : <span class="font-bold">{{ money }}</span></div>
+    <div class="text-white text-xl md:mb-14 m-2 md:text-center pl-2">
+      Argent : <span class="font-bold">{{ money }}</span>
+    </div>
     <div class="flex md:flex-col w-auto">
       <input
         [(ngModel)]="mise"
         *ngIf="canBet"
-
         min="0"
-        class="appearance-none w-1/2 focus:outline-none  border focus:border-green-600 md:w-auto mx-2 py-2 px-1 md:my-1 h-10 font-mono rounded"
+        class="appearance-none w-1/2 focus:outline-none border focus:border-green-600 md:w-auto mx-2 py-2 px-1 md:my-1 h-10 font-mono rounded"
         type="number"
       />
       <input
         [(ngModel)]="mise"
         *ngIf="!canBet"
         readonly
-        
         min="0"
-        class="appearance-none w-1/2 focus:outline-none  border focus:border-green-600 md:w-auto mx-2 py-2 px-1 md:my-1 h-10 font-mono rounded"
+        class="appearance-none w-1/2 focus:outline-none border focus:border-green-600 md:w-auto mx-2 py-2 px-1 md:my-1 h-10 font-mono rounded"
         type="number"
       />
       <button
@@ -29,33 +29,59 @@
         Miser
       </button>
       <button
-      *ngIf="canBet && this.miseOnTable"
-      class="bg-green-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded inset-0"
-      (click)="cancelMise()"
-    >
-      Annuler
-    </button>
+        *ngIf="canBet && this.miseOnTable"
+        class="bg-green-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded inset-0"
+        (click)="cancelMise()"
+      >
+        Annuler
+      </button>
       <button
         *ngIf="!canBet && this.miseOnTable"
         class="bg-blue-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded"
         (click)="onRetrait()"
       >
-      Retrait
+        Retrait
       </button>
       <button
-      *ngIf="!canBet && !this.miseOnTable"
-      class="bg-indigo-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded"
-    >
-      En attente
-    </button>
+        *ngIf="!canBet && !this.miseOnTable"
+        class="bg-indigo-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded"
+      >
+        En attente
+      </button>
     </div>
   </div>
 
   <div
-    class="flex justify-center items-center h-64 md:h-64 w-full rounded-t md:my-8 bg-gray-800 md:border-l-2 border-gray-600"
+    class="relative flex justify-center items-center h-64 md:h-64 w-full rounded-t md:my-8 bg-gray-800 md:border-l-2 border-gray-600"
   >
     <div *ngIf="!canBet" class="font-mono text-6xl text-white">x{{ time }}</div>
-    <div *ngIf="canBet" class="font-mono text-6xl text-red-500">x{{ time }}</div>
+    <div *ngIf="canBet" class="font-mono text-6xl text-red-500">
+      x{{ time }}
+    </div>
+    <div>
+      <svg
+        *ngIf="!readyToPlay"
+        xmlns="http://www.w3.org/2000/svg"
+        class="animate-pulse text-white h-10 w-10"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M5.05 3.636a1 1 0 010 1.414 7 7 0 000 9.9 1 1 0 11-1.414 1.414 9 9 0 010-12.728 1 1 0 011.414 0zm9.9 0a1 1 0 011.414 0 9 9 0 010 12.728 1 1 0 11-1.414-1.414 7 7 0 000-9.9 1 1 0 010-1.414zM7.879 6.464a1 1 0 010 1.414 3 3 0 000 4.243 1 1 0 11-1.415 1.414 5 5 0 010-7.07 1 1 0 011.415 0zm4.242 0a1 1 0 011.415 0 5 5 0 010 7.072 1 1 0 01-1.415-1.415 3 3 0 000-4.242 1 1 0 010-1.415zM10 9a1 1 0 011 1v.01a1 1 0 11-2 0V10a1 1 0 011-1z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      
+    </div>
+    <div class="absolute bottom-0 h-2 w-full rounded ">
+    <div 
+    [ngStyle]="{'width':barLenght + '%'}"
+    class=" h-2 w-full rounded bg-blue-400">
+      </div>
+
+    </div>
+
   </div>
 </div>
 <div class="mx-12 w-auto mt-3 md:mx-20 bg-gray-800 py-3">
