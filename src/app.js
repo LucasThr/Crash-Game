@@ -9,7 +9,7 @@ const INDEX = '/index.html';
 const PORT = 8000;
 
 const server = express()
-  .use((req, res) => res.sendFile(__dirname + '/dist/RocketMoney/index.html'))
+  .use((req, res) => res.sendFile(__dirname + '/index.html'))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
   
 const io = socketIO(server, {
