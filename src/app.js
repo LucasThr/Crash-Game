@@ -10,7 +10,6 @@ const io = socketIO(server, {
     origin: "*",
   },
 });
-console.log("PROBLEME");
 var timer;
 
 const port = process.env.PORT || 3000;
