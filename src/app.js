@@ -7,7 +7,7 @@ const server = http.Server(app);
 const socketIO = require("socket.io");
 const io = socketIO(server, {
   cors: { 
-    origin: "*",
+    origin: "https://lucasthr-crashgame.herokuapp.com:8080",
   },
 });
 var timer;
