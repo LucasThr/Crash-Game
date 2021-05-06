@@ -3,10 +3,10 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(__dirname + '/dist/rocket-money'));
+app.use(express.static(__dirname + '/rocket-money/dist/'));
 
 app.get('/*', (req,res,next) => {
-    res.sendFile(path.join(__dirname + '/dist/rocket-money/index.html'));
+    res.sendFile(path.join('./rocket-money/dist/index.html'));
 });
 
 
