@@ -7,12 +7,12 @@ const server = http.Server(app);
 const socketIO = require("socket.io");
 const io = socketIO(server, {
   cors: { 
-    origin: "https://lucasthr-crashgame.herokuapp.com:8080",
+    origin: "https://lucasthr-crashgame.herokuapp.com:80",
   }, 
 });
 var timer;
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 // const port = 3000;
 var isPlaying = false;
 io.on("connection", (socket) => {
