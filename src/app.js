@@ -12,7 +12,7 @@ const io = socketIO(server, {
 });
 var timer;
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 // const port = 3000;
 var isPlaying = false;
 io.on("connection", (socket) => {
