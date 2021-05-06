@@ -5,13 +5,14 @@ const http = require("http");
 // const server = http.Server(app);
 
 const socketIO = require("socket.io");
-const INDEX = '/index.html';
-const PORT = 8000;
+const INDEX = '/dist/RocketMoney/index.html';
+const port = process.env.PORT || 3000;
+
 
 const server = express()
-  .use((req, res) => res.sendFile(__dirname + '/index.html'))
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
-  
+
 const io = socketIO(server, {
   cors: { 
     // origin: "https://lucasthr-crashgame.herokuapp.com",
@@ -28,6 +29,7 @@ var isPlaying = false;
 io.on("connection", (socket) => {
   console.log("user connected");
   socket.emit('connected',true)
+  socket.on('disconnect', () => console.log('Client disconnected'));
   //Start Chrono
   start = () => {
     io.emit("canBet", false);
