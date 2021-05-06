@@ -6,7 +6,7 @@ const http = require("http");
 
 const socketIO = require("socket.io");
 const INDEX = '/dist/RocketMoney/index.html';
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 
 const server = express()
