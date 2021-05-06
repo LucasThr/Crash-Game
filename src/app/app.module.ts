@@ -8,7 +8,7 @@ import { BetComponent } from './bet/bet.component';
 import { GraphicsComponent } from './graphics/graphics.component';
 import { ChatComponent } from './chat/chat.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 // const port = 8000;
 console.log(port)
 // const config: SocketIoConfig = { url: 'localhost:8000', options: {} };
