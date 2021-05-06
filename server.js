@@ -6,7 +6,7 @@ const app = express();
 app.use(express.static(__dirname + '/rocket-money/dist/'));
 
 app.get('*', (req,res) => {
-    res.sendFile('./rocket-money/dist/index.html');
+    res.sendFile(__dirname + '/rocket-money/dist/index.html');
 });
 
 
