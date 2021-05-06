@@ -2,18 +2,26 @@ const express = require("express");
 const app = express();
 
 const http = require("http");
-const server = http.Server(app);
+// const server = http.Server(app);
 
 const socketIO = require("socket.io");
+const INDEX = '/index.html';
+const PORT = 8000;
+
+const server = express()
+  .use((req, res) => res.sendFile(__dirname + '/dist/RocketMoney/index.html'))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+  
 const io = socketIO(server, {
   cors: { 
-    origin: "https://lucasthr-crashgame.herokuapp.com",
+    // origin: "https://lucasthr-crashgame.herokuapp.com",
+    origin: "*",
+
   }, 
 });
 var timer;
 
-// const port = process.env.PORT || 80;
-const port = 8080;
+// const port = process.env.PORT || 8080;
 
 // const port = 3000;
 var isPlaying = false;
@@ -97,6 +105,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(port, () => {
-  console.log(`started on port: ${port}`);
-});
+// server.listen(port, () => {
+//   console.log(`started on port: ${port}`);
+// });
