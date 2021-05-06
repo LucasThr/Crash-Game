@@ -12,3 +12,5 @@ app.get('/*', (req,res) => {
 
 app.listen(process.env.PORT || 8080);
 
+console.log("test port")
+console.log(process.env.PORT)
