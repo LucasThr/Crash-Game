@@ -6,7 +6,8 @@ const http = require("http");
 
 const socketIO = require("socket.io");
 const INDEX = '/dist/RocketMoney/index.html';
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 
 const server = express()
@@ -24,7 +25,6 @@ var timer;
 
 // const port = process.env.PORT || 8080;
 
-// const port = 3000;
 var isPlaying = false;
 io.on("connection", (socket) => {
   console.log("user connected");
