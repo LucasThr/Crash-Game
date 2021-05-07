@@ -14,13 +14,14 @@ const server = express()
   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-const io = socketIO(server, {
-  cors: { 
-    // origin: "https://lucasthr-crashgame.herokuapp.com",
-    origin: "*",
+const io = socketIO(server
+  // , {
+  // cors: { 
+  //   // origin: "https://lucasthr-crashgame.herokuapp.com",
+  //   origin: "*",
 
-  }, 
-});
+  // },}
+);
 var timer;
 
 // const port = process.env.PORT || 8080;
