@@ -58,7 +58,6 @@ io.on("connection", (socket) => {
 		divide = (Math.floor(Math.random() * (12 - 10) + 10) / 100) * 10;
 
         max = max / divide
-		console.log(divide)
       }
       if (time < 5 && time >= 2) {
         time = Number(
@@ -76,11 +75,9 @@ io.on("connection", (socket) => {
 
         max = max / divide;
       }
-      console.log(time);
 
       crash = (Math.floor(Math.random() * (max - 1) + 1) / 100) * 100;
 	//   console.log(max)
-      console.log(crash);
       io.emit("timer", time);
 
       if (crash == 1 || crash == 0) {
