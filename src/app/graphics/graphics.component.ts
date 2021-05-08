@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { from, Observable, of, TimeoutError } from 'rxjs';
 import { Bet } from '../bet';
 import { BetRecord } from '../bet';
-import { Socket } from 'ngx-socket-io';
 import { BetsService } from '../bets.service';
+import { UserService } from '../user.service'
+
 @Component({
   selector: 'app-graphics',
   templateUrl: './graphics.component.html',
@@ -25,7 +26,9 @@ export class GraphicsComponent implements OnInit {
   barLenght!:number
   timeToShow:string='1.00'
   displayAllScore:boolean=false
-  constructor(public betService: BetsService) {
+  constructor(public betService: BetsService,
+    public userService: UserService
+    ) {
     this.time = 1.00;
   }
 
@@ -43,7 +46,9 @@ export class GraphicsComponent implements OnInit {
   }
 
   addBet(initial: number, value: number, isLose?: boolean) {
-    this.bets.push({
+    this.betService.sendBet({
+      user:this.userService.user,
+      time:this.getCurrentTime(),
       initial: initial,
       value: value,
       gain: isLose ? 0 : this.fixedDecimal(initial * value),
@@ -67,6 +72,13 @@ export class GraphicsComponent implements OnInit {
     return Number(number.toFixed(2));
   }
 
+  getCurrentTime(){
+    let today = new Date();
+    let hour = today.getHours()
+    let minute = today.getMinutes()
+    return `${hour}:${minute}`
+  }
+
   startChronoBar(){
     this.chronoBar=window.setInterval(()=>{
       this.barLenght-=1
@@ -74,6 +86,9 @@ export class GraphicsComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.betService.bets.subscribe((bets) => {
+      this.bets = bets;
+    });
     this.betService.time.subscribe((time) => {
       this.time = time;
       this.timeToShow=time.toString()
@@ -88,7 +103,8 @@ export class GraphicsComponent implements OnInit {
       if (this.canBet == true) {
         this.miseOnTable = 0;
         this.barLenght=100
-        this.isWithdraw==false
+        this.isWithdraw=false
+        console.log(true)
         this.startChronoBar()
       }
       if (this.canBet == false) {

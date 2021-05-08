@@ -35,7 +35,7 @@ const io = socketIO(server, {
 var timer;
 
 let ChatList = []
-let ParisList = []
+let BetList = []
 
 // const port = process.env.PORT || 8080;
 
@@ -44,6 +44,7 @@ io.on("connection", (socket) => {
   console.log("user connected");
   socket.emit('connected',true)
   socket.emit("chats", ChatList);
+  socket.emit("bets", BetList);
 
   socket.on('disconnect', () => console.log('Client disconnected'));
   //Start Chrono
@@ -116,6 +117,14 @@ io.on("connection", (socket) => {
     io.emit("chats", ChatList);
 
   });
+  socket.on("sendBet", (bet) => {
+    console.log("socket ok 1 ");
+    BetList.push(bet)
+    console.log(BetList)
+    io.emit("bets", BetList);
+
+  });
+
 
 });
 

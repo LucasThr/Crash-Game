@@ -4,6 +4,8 @@ export interface Bet {
   }
 
 export interface BetRecord {
+  user:string,
+  time:string,
   initial: number;
   value: number;
   gain:number

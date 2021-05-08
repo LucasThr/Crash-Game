@@ -24,6 +24,7 @@ export class ChatComponent implements OnInit {
     this.userService.setName(name)
   }
 
+
   // name = 'Angular';
 
   // scrollToElement(el:ElementRef): void {
@@ -46,7 +47,6 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.chatService.chats.subscribe((messages) => {
-      console.log('message recu !');
       this.messageList = messages;
     });
   }
