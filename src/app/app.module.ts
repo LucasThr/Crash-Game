@@ -11,7 +11,10 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 // const port = process.env.PORT || 3000;
 // const port = 3000;
 // const config: SocketIoConfig = { url: 'localhost:3000', options: {} };
-const config: SocketIoConfig = { url: `https://lucasthr-crashgame.herokuapp.com/`, options: {} };
+let hostname = window.location.hostname;
+let url = ( hostname === 'localhost' ) ? `${window.location.protocol}//${hostname}:3000` : "https://lucasthr-crashgame.herokuapp.com";
+console
+const config: SocketIoConfig = { url: `${url}`, options: {} };
 
 @NgModule({
   declarations: [AppComponent, BetComponent, GraphicsComponent, ChatComponent],
