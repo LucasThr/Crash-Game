@@ -34,12 +34,17 @@ const io = socketIO(server, {
 });
 var timer;
 
+let ChatList = []
+let ParisList = []
+
 // const port = process.env.PORT || 8080;
 
 var isPlaying = false;
 io.on("connection", (socket) => {
   console.log("user connected");
   socket.emit('connected',true)
+  socket.emit("chats", ChatList);
+
   socket.on('disconnect', () => console.log('Client disconnected'));
   //Start Chrono
   start = () => {
@@ -105,14 +110,13 @@ io.on("connection", (socket) => {
   // socket.emit('startGame')
 
   //CHAT
-  socket.on("getChat", (msg) => {
+  socket.on("sendChat", (msg) => {
     console.log("socket ok 1 ");
-    socket.emit("chat", msg);
+    ChatList.push(msg)
+    io.emit("chats", ChatList);
+
   });
-  socket.on("getChats", (msg) => {
-    console.log("socket ok 2");
-    io.emit("chats", msg);
-  });
+
 });
 
 server.listen(PORT, () => {

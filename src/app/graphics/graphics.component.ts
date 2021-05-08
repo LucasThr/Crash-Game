@@ -24,6 +24,7 @@ export class GraphicsComponent implements OnInit {
   chronoBar!:number;
   barLenght!:number
   timeToShow:string='1.00'
+  displayAllScore:boolean=false
   constructor(public betService: BetsService) {
     this.time = 1.00;
   }
@@ -98,38 +99,3 @@ export class GraphicsComponent implements OnInit {
   }
 }
 
-// start() {
-//   var crash: number;
-//   var max: number;
-//   this.isWithdraw = false;
-//   max = (Math.floor(Math.random() * (500 - 0) + 0) / 100) * 100;
-//   this.timer = window.setInterval(() => {
-//     if (this.time > 0 && this.time < 2) {
-//       this.time = Number(
-//         Number(Math.round((this.time += 0.01) * 100) / 100).toFixed(2)
-//       );
-//     }
-//     if (this.time < 5 && this.time >= 2) {
-//       this.time = Number(
-//         Number(Math.round((this.time += 0.04) * 100) / 100).toFixed(2)
-//       );
-
-//       max = max / 2;
-//     }
-//     if (this.time < 100 && this.time >= 5) {
-//       this.time = Number(
-//         Number(Math.round((this.time += 0.08) * 100) / 100).toFixed(2)
-//       );
-//       max = max / 2;
-//     }
-//     crash = (Math.floor(Math.random() * (max - 1) + 1) / 100) * 100;
-//     console.log(crash);
-//     if (crash == 1) {
-//       clearTimeout(this.timer);
-//       this.isCrash = true;
-//       if(!this.isWithdraw){
-//       this.addBet(this.mise, this.time,true);
-//       }
-//     }
-//   }, 100);
-// }

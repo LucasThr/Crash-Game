@@ -8,16 +8,13 @@ import { Userchat } from './userchat'
   providedIn: 'root',
 })
 export class ChatService {
-  chat = this.socket.fromEvent<string>('chat');
   chats =  this.socket.fromEvent<Userchat[]>('chats');
   constructor(private socket: Socket) {}
 
   public sendChat(msg:Userchat){
-    this.socket.emit('getChat',msg)
+    this.socket.emit('sendChat',msg)
   }
 
-  public getChats(msg:Userchat[]){
-    this.socket.emit('getChats',msg)
-  }
+
 
 }

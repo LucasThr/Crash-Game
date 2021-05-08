@@ -45,11 +45,6 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.chatService.chat.subscribe((message) => {
-      console.log('message recu');
-      this.messageList.push(this.messageUser);
-      this.chatService.getChats(this.messageList);
-    });
     this.chatService.chats.subscribe((messages) => {
       console.log('message recu !');
       this.messageList = messages;
