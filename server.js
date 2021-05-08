@@ -3,31 +3,27 @@ const path = require('path');
 const http = require("http");
 
 const app = express();
-
 app.use(express.static(__dirname + '/dist/RocketMoney/'));
-
 app.get('/*', (req,res) => {
     res.sendFile(__dirname + '/dist/RocketMoney/index.html');
 });
 
 
-app.listen(process.env.PORT || 8080);
-
 console.log("test port")
 console.log(process.env.PORT)
 // app.listen(process.env.PORT || 8080);
-// const server = http.Server(app);
+const server = http.Server(app);
 
 
 const socketIO = require("socket.io");
 const INDEX = '/dist/RocketMoney/index.html';
-// const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 // const PORT = 3000;
 
 
-const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(process.env.PORT || 3000, () => console.log(`Listening on ${(process.env.PORT || 3000)}`));
+// const server = express()
+//   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+//   .listen(process.env.PORT || 3000, () => console.log(`Listening on ${(process.env.PORT || 3000)}`));
 
 const io = socketIO(server, {
   cors: { 
@@ -122,6 +118,6 @@ io.on("connection", (socket) => {
   });
 });
 
-// server.listen(port, () => {
-//   console.log(`started on port: ${port}`);
-// });
+server.listen(PORT, () => {
+  console.log(`started on PORT: ${PORT}`);
+});
