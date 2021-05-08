@@ -36,14 +36,14 @@
         Annuler
       </button>
       <button
-        *ngIf="!canBet && this.miseOnTable"
+        *ngIf="!canBet && this.miseOnTable && !isWithdraw"
         class="bg-blue-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded"
         (click)="onRetrait()"
       >
         Retrait
       </button>
       <button
-        *ngIf="!canBet && !this.miseOnTable"
+        *ngIf="!canBet && (!this.miseOnTable || isWithdraw)"
         class="bg-indigo-400 h-10 w-1/2 md:w-auto mx-2 text-green-800 text-2xl rounded"
       >
         En attente

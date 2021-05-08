@@ -87,6 +87,7 @@ export class GraphicsComponent implements OnInit {
       if (this.canBet == true) {
         this.miseOnTable = 0;
         this.barLenght=100
+        this.isWithdraw==false
         this.startChronoBar()
       }
       if (this.canBet == false) {
