@@ -14,7 +14,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 let hostname = window.location.hostname;
 let url = ( hostname === 'localhost' ) ? `${window.location.protocol}//${hostname}:3000` : "https://lucasthr-crashgame.herokuapp.com";
 console
-const config: SocketIoConfig = { url: `${url}`, options: {} };
+const config: SocketIoConfig = { url: `${url}`, options: {} }; 
 
 @NgModule({
   declarations: [AppComponent, BetComponent, GraphicsComponent, ChatComponent],
