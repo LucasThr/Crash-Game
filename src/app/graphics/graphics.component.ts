@@ -51,7 +51,7 @@ export class GraphicsComponent implements OnInit {
       time:this.getCurrentTime(),
       initial: initial,
       value: value,
-      gain: isLose ? 0 : this.fixedDecimal(initial * value),
+      gain: this.isWithdraw ?  this.fixedDecimal(initial * value) : 0,
     });
   }
 
@@ -101,6 +101,10 @@ export class GraphicsComponent implements OnInit {
     this.betService.canBet.subscribe((canBet) => {
       this.canBet = canBet;
       if (this.canBet == true) {
+        if(this.isWithdraw==false && this.miseOnTable){
+          this.addBet(this.mise, this.time);
+          
+        }
         this.miseOnTable = 0;
         this.barLenght=100
         this.isWithdraw=false
