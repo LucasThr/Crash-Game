@@ -8,5 +8,5 @@ Site Web de paris en multijoueur avec socket.io et angular
 
 `ng serve`
 
-`node src/app.js`
+`node server.js`
 
