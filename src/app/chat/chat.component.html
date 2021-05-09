@@ -1,6 +1,6 @@
 <div class="flex-1 w-auto  mx-8 md:mx-0 md:pr-8 pb-8">
   <h3 class="font-bold text-white">CHAT</h3>
-  <div #chat class="overflow-auto h-64 w-auto bg-gray-800 overscroll-auto p-2">
+  <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="overflow-auto h-64 w-auto bg-gray-800 overscroll-auto p-2">
     <div class="my-1mx-2" *ngFor="let message of messageList">
       <div class="min-h-2  rounded w-auto text-gray-400"><span class="text-xs text-gray-500">{{message.time}} | </span><span class="text-white">{{message.username}} </span>: {{ message.message }}</div>
     </div>
