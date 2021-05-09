@@ -24,6 +24,12 @@ export class ChatComponent implements OnInit {
     this.userService.setName(name)
   }
 
+  getCurrentTime(){
+    let today = new Date();
+    let hour = today.getHours()
+    let minute = today.getMinutes()
+    return `${hour}:${minute}`
+  }
 
   // name = 'Angular';
 
@@ -40,7 +46,7 @@ export class ChatComponent implements OnInit {
   sendMessage() {
     if(!this.newMessage)return
     console.log(this.newMessage);
-    this.messageUser={username:this.userService.user,message:this.newMessage}
+    this.messageUser={username:this.userService.user,message:this.newMessage,time:this.getCurrentTime()}
     this.chatService.sendChat(this.messageUser);
     this.newMessage=""
   }

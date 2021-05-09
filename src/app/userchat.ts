@@ -1,4 +1,5 @@
 export interface Userchat {
     username:string,
-    message:string
+    message:string,
+    time:string
 }
