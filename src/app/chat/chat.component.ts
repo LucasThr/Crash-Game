@@ -25,9 +25,11 @@ export class ChatComponent implements OnInit {
   }
 
   getCurrentTime(){
-    let today = new Date();
-    let hour = today.getHours()
-    let minute = today.getMinutes()
+    let date = new Date();
+    let hours = date.getHours()
+    let hour = hours<10 ?  '0' + hours : hours
+    let minutes = date.getMinutes()
+    let minute = minutes<10 ? '0' + minutes : minutes
     return `${hour}:${minute}`
   }
 

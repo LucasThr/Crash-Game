@@ -74,7 +74,6 @@ export class GraphicsComponent implements OnInit {
 
   getCurrentTime(){
     let date = new Date();
-    let today=date.toString()
     let hours = date.getHours()
     let hour = hours<10 ?  '0' + hours : hours
     let minutes = date.getMinutes()
