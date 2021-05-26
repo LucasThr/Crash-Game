@@ -74,6 +74,7 @@
 </div>
 <div *ngIf="!userService.user" class="flex flex-col justify-center items-center  h-screen w-full bg-gray-700">
     <div class="text-xl text-white font-bold mb-6"> Entrer votre pseudo</div>
+    <app-gift></app-gift>
     <input
     class="py-1 px-2 appearance-none h-8 w-2/3 rounded-l border-r-2 border-gray-600"
     [(ngModel)]="user"

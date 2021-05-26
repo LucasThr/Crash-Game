@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { from, Observable, of, TimeoutError } from 'rxjs';
-import { Bet } from '../bet';
 import { BetRecord } from '../bet';
 import { BetsService } from '../bets.service';
 import { UserService } from '../user.service'
@@ -88,9 +86,11 @@ export class GraphicsComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    //Recupere l'historique des bets
     this.betService.bets.subscribe((bets) => {
       this.bets = bets;
     });
+    //recupere le temps du chrono du serveur vers l'utilisateur
     this.betService.time.subscribe((time) => {
       this.time = time;
       this.timeToShow=time.toString()

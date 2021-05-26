@@ -18,5 +18,10 @@ export class BetsService {
     this.socket.emit('sendBet',bet)
   }
 
+  public sendClaim(claim:boolean){
+    this.socket.emit('sendClaim',claim)
+  }
+
+
 
 }

@@ -8,6 +8,7 @@ import { BetComponent } from './bet/bet.component';
 import { GraphicsComponent } from './graphics/graphics.component';
 import { ChatComponent } from './chat/chat.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { GiftComponent } from './gift/gift.component';
 // const port = process.env.PORT || 3000;
 // const port = 3000;
 // const config: SocketIoConfig = { url: 'localhost:3000', options: {} };
@@ -17,7 +18,7 @@ console
 const config: SocketIoConfig = { url: `${url}`, options: {} }; 
 
 @NgModule({
-  declarations: [AppComponent, BetComponent, GraphicsComponent, ChatComponent],
+  declarations: [AppComponent, BetComponent, GraphicsComponent, ChatComponent, GiftComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule,SocketIoModule.forRoot(config)],
   providers: [],
   bootstrap: [AppComponent],
