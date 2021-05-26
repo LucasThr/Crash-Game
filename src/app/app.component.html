@@ -78,6 +78,9 @@
     class="py-1 px-2 appearance-none h-8 w-2/3 rounded-l border-r-2 border-gray-600"
     [(ngModel)]="user"
     (keyup)="$event.keyCode == 13 && setName()"  />    
+    <button 
+    (click)="setName()"
+    class="bg-green-500 mt-4 px-4 py-2 rounded">Continuer</button>
   </div> 
 <footer class="h-10 w-full flex justify-center items-center bg-gray-800 text-gray-400 text-sm">
 @2021 - LucasThr
