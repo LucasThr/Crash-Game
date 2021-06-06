@@ -33,17 +33,6 @@ export class ChatComponent implements OnInit {
     return `${hour}:${minute}`
   }
 
-  // name = 'Angular';
-
-  // scrollToElement(el:ElementRef): void {
-  //   this.myScrollContainer.nativeElement.scroll({
-  //     top: this.myScrollContainer.nativeElement.scrollHeight,
-
-  //     left: 0,
-
-  //     behavior: 'smooth',
-  //   });
-  // }
 
   sendMessage() {
     if(!this.newMessage)return

@@ -11,14 +11,12 @@ app.get('/*', (req,res) => {
 
 console.log("test port")
 console.log(process.env.PORT)
-// app.listen(process.env.PORT || 8080);
 const server = http.Server(app);
 
 
 const socketIO = require("socket.io");
 const INDEX = '/dist/RocketMoney/index.html';
 const PORT = process.env.PORT || 3000;
-// const PORT = 3000;
 
 
 // const server = express()
@@ -36,10 +34,9 @@ var timer;
 
 let ChatList = []
 let BetList = []
-
+let UserList = []
 // const port = process.env.PORT || 8080;
 
-var isPlaying = false;
 io.on("connection", (socket) => {
   console.log("user connected");
   socket.emit('connected',true)
@@ -97,9 +94,13 @@ io.on("connection", (socket) => {
       }
     }, 100);
   };
+
+  //Lance le chrono lors du lancement du serveur
   if (timer == undefined) {
     start();
   }
+
+  //Attend 10 sec pour le prochain lancement du chrono
   waitForNext = () => {
     // console.log(timer);
     setTimeout(() => {
@@ -112,20 +113,55 @@ io.on("connection", (socket) => {
 
   //CHAT
   socket.on("sendChat", (msg) => {
-    console.log("socket ok 1 ");
     ChatList.push(msg)
     io.emit("chats", ChatList);
 
   });
+
+  //Historique des bets
   socket.on("sendBet", (bet) => {
-    console.log("socket ok 1 ");
+    // if(UserList.some(x => x.name == bet.user)){
+    //  console.log(UserList[0])
+    // }
+    let index =UserList.findIndex(x => x.name == bet.user)
+    UserList[index]={name:bet.user,money:UserList[index].money+(bet.gain-bet.initial)}
+    console.log(UserList)
     BetList.push(bet)
-    console.log(BetList)
     io.emit("bets", BetList);
+  });
+
+   //Gere l'argent lors de la mise en place des mises
+   socket.on("setMoney", (money) => {
+    // BetList.push(bet)
+    // console.log(BetList)
+    // socket.emit("setMoney", money);
 
   });
 
 
+
+
+  //Verifie si l'utilisateur existe deja et lui attribue son argent
+  socket.on("verifyUser", (user) => {
+    let usernameList=[]
+    console.log("test")
+    for (const [key, value] of Object.entries(UserList)) {
+      usernameList.push(value.name);
+    }
+
+    //Si existe deja on recupere l'argent stocké dans le tableau
+    if(usernameList.includes(user)){
+      UserList.map(userData  => {
+         if(userData.name==user){
+          socket.emit("setUserData", {username:user,money:userData.money});
+         }
+      })
+    // Sinon l'argent est fixé à 100
+    }else{
+      UserList.push({name:user,money:100})
+      socket.emit("setUserData", {username:user,money:100});
+    }
+  });
 });
 
 server.listen(PORT, () => {

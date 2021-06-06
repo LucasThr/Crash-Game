@@ -15,6 +15,7 @@ export class BetsService {
   constructor(public socket: Socket) {}
 
   public sendBet(bet:BetRecord){
+    console.log(bet)
     this.socket.emit('sendBet',bet)
   }
 

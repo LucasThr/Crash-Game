@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BetRecord } from '../bet';
 import { BetsService } from '../bets.service';
 import { UserService } from '../user.service'
+import { User } from '../user'
 
 @Component({
   selector: 'app-graphics',
@@ -9,13 +10,12 @@ import { UserService } from '../user.service'
   styleUrls: ['../app.component.css'],
 })
 export class GraphicsComponent implements OnInit {
-  money: number = 100;
+  money!: number;
   mise!: number;
   bets: BetRecord[] = [];
   canBet!: boolean;
-  // bet: Bet = { id: 1, value: 0 };
+  username!: string
   time!: number;
-  timer!: number;
   isCrash: boolean = false;
   isWithdraw: boolean = false;
   miseOnTable: number = 0;
@@ -23,7 +23,6 @@ export class GraphicsComponent implements OnInit {
   chronoBar!:number;
   barLenght!:number
   timeToShow:string='1.00'
-  displayAllScore:boolean=false
   constructor(public betService: BetsService,
     public userService: UserService
     ) {
@@ -45,7 +44,7 @@ export class GraphicsComponent implements OnInit {
 
   addBet(initial: number, value: number, isLose?: boolean) {
     this.betService.sendBet({
-      user:this.userService.user,
+      user:this.username,
       time:this.getCurrentTime(),
       initial: initial,
       value: value,
@@ -90,16 +89,21 @@ export class GraphicsComponent implements OnInit {
     this.betService.bets.subscribe((bets) => {
       this.bets = bets;
     });
+
+
     //recupere le temps du chrono du serveur vers l'utilisateur
     this.betService.time.subscribe((time) => {
       this.time = time;
       this.timeToShow=time.toString()
       this.timeToShow=Number.parseFloat(this.timeToShow).toFixed(2)
     });
+
+    //
     this.betService.readyToPlay.subscribe((verify) => {
       this.readyToPlay = verify;
     });
 
+    //
     this.betService.canBet.subscribe((canBet) => {
       this.canBet = canBet;
       if (this.canBet == true) {
@@ -118,6 +122,16 @@ export class GraphicsComponent implements OnInit {
         this.barLenght=0
       }
     });
+
+
+    //On recupere les informations de l'utilisateur : nom .. money ...
+    this.userService.userData.subscribe((userData) =>{
+      console.log(userData)
+      for (const [key, value] of Object.entries(userData)) {
+        if(key=="username"){ this.username = value}
+        if(key =="money") this.money=value
+      }
+    })
   }
 }
 
