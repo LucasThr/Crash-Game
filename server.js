@@ -15,7 +15,6 @@ const server = http.Server(app);
 
 
 const socketIO = require("socket.io");
-const { hasOwnProperty } = require('tslint/lib/utils');
 const INDEX = '/dist/RocketMoney/index.html';
 const PORT = process.env.PORT || 3000;
 
@@ -88,9 +87,6 @@ io.on("connection", (socket) => {
         io.emit("canBet", true);
         waitForNext();
         isCrash = true;
-        if (!isWithdraw) {
-          // addBet(mise, time,true);
-        }
       }
     }, 100);
   };
@@ -127,8 +123,9 @@ io.on("connection", (socket) => {
       return
 
     }
-    UserList[index]={name:bet.user,money:UserList[index].money+(bet.gain-bet.initial)}
-    console.log(UserList)
+
+    
+    UserList[index]={name:bet.user,money:UserList[index].money+(bet.gain-bet.initial)} // Mets à jour l'argent du user dans le server
     BetList.push(bet)
     io.emit("bets", BetList);
   });

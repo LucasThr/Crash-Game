@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BetComponent } from './bet/bet.component';
 import { GraphicsComponent } from './graphics/graphics.component';
 import { ChatComponent } from './chat/chat.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -19,7 +18,7 @@ console
 const config: SocketIoConfig = { url: `${url}`, options: {} }; 
 
 @NgModule({
-  declarations: [AppComponent, BetComponent, GraphicsComponent, ChatComponent, GiftComponent, UserheadbarComponent],
+  declarations: [AppComponent, GraphicsComponent, ChatComponent, GiftComponent, UserheadbarComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule,SocketIoModule.forRoot(config)],
   providers: [],
   bootstrap: [AppComponent],

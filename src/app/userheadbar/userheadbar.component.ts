@@ -8,7 +8,7 @@ import { User } from '../user'
 })
 export class UserheadbarComponent implements OnInit {
   money!: number;
-  userData!: User[]
+  username!: string
   constructor(
     public userService: UserService
     ) {
@@ -16,7 +16,11 @@ export class UserheadbarComponent implements OnInit {
   ngOnInit(): void {
     //On recupere les informations de l'utilisateur : nom .. money ...
     this.userService.userData.subscribe((userData) =>{
-      this.userData=userData
+      console.log(userData)
+      for (const [key, value] of Object.entries(userData)) {
+        if(key=="username"){ this.username = value}
+        if(key =="money") this.money=value
+      }
     })
   }
 
