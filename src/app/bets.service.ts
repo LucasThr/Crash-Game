@@ -11,6 +11,7 @@ export class BetsService {
   canBet = this.socket.fromEvent<boolean>('canBet');
   readyToPlay = this.socket.fromEvent<boolean>('connected');
   bets =  this.socket.fromEvent<BetRecord[]>('bets');
+  error =  this.socket.fromEvent<string>('errorbet');
 
   constructor(public socket: Socket) {}
 

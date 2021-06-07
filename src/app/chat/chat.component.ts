@@ -20,10 +20,6 @@ export class ChatComponent implements OnInit {
     public userService: UserService
   ) {}
 
-  setUser(name:string){
-    this.userService.setName(name)
-  }
-
   getCurrentTime(){
     let date = new Date();
     let hours = date.getHours()
@@ -37,7 +33,7 @@ export class ChatComponent implements OnInit {
   sendMessage() {
     if(!this.newMessage)return
     console.log(this.newMessage);
-    this.messageUser={username:this.userService.user,message:this.newMessage,time:this.getCurrentTime()}
+    this.messageUser={username:this.user,message:this.newMessage,time:this.getCurrentTime()}
     this.chatService.sendChat(this.messageUser);
     this.newMessage=""
   }
@@ -46,5 +42,11 @@ export class ChatComponent implements OnInit {
     this.chatService.chats.subscribe((messages) => {
       this.messageList = messages;
     });
+    this.userService.userData.subscribe((userData) =>{
+      console.log(userData)
+      for (const [key, value] of Object.entries(userData)) {
+        if(key=="username"){ this.user = value}
+      }
+    })
   }
 }

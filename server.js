@@ -15,6 +15,7 @@ const server = http.Server(app);
 
 
 const socketIO = require("socket.io");
+const { hasOwnProperty } = require('tslint/lib/utils');
 const INDEX = '/dist/RocketMoney/index.html';
 const PORT = process.env.PORT || 3000;
 
@@ -39,7 +40,6 @@ let UserList = []
 
 io.on("connection", (socket) => {
   console.log("user connected");
-  socket.emit('connected',true)
   socket.emit("chats", ChatList);
   socket.emit("bets", BetList);
 
@@ -120,10 +120,13 @@ io.on("connection", (socket) => {
 
   //Historique des bets
   socket.on("sendBet", (bet) => {
-    // if(UserList.some(x => x.name == bet.user)){
-    //  console.log(UserList[0])
-    // }
     let index =UserList.findIndex(x => x.name == bet.user)
+    console.log(UserList[index])
+    if(!UserList[index]){console.log("ERREUR : utilisateur non défini!")
+      socket.emit("errorbet","Erreur : recharger la page")
+      return
+
+    }
     UserList[index]={name:bet.user,money:UserList[index].money+(bet.gain-bet.initial)}
     console.log(UserList)
     BetList.push(bet)
@@ -145,6 +148,8 @@ io.on("connection", (socket) => {
   socket.on("verifyUser", (user) => {
     let usernameList=[]
     console.log("test")
+    socket.emit('connected',true)
+
     for (const [key, value] of Object.entries(UserList)) {
       usernameList.push(value.name);
     }

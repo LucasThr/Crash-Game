@@ -15,6 +15,7 @@ export class GraphicsComponent implements OnInit {
   bets: BetRecord[] = [];
   canBet!: boolean;
   username!: string
+  error!:string
   time!: number;
   isCrash: boolean = false;
   isWithdraw: boolean = false;
@@ -59,7 +60,7 @@ export class GraphicsComponent implements OnInit {
     this.addMoney(this.time);
     this.addBet(this.mise, this.time);
   }
-
+  
   cancelMise() {
     this.money += this.miseOnTable;
     this.miseOnTable = 0;
@@ -100,6 +101,7 @@ export class GraphicsComponent implements OnInit {
 
     //
     this.betService.readyToPlay.subscribe((verify) => {
+      console.log("read")
       this.readyToPlay = verify;
     });
 
@@ -123,6 +125,9 @@ export class GraphicsComponent implements OnInit {
       }
     });
 
+    this.betService.error.subscribe((error)=>{
+      this.error=error
+    })
 
     //On recupere les informations de l'utilisateur : nom .. money ...
     this.userService.userData.subscribe((userData) =>{
