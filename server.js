@@ -35,12 +35,14 @@ var timer;
 let ChatList = []
 let BetList = []
 let UserList = []
+let MultiplierList = []
 // const port = process.env.PORT || 8080;
 
 io.on("connection", (socket) => {
   console.log("user connected");
   socket.emit("chats", ChatList);
   socket.emit("bets", BetList);
+  socket.emit("multiplierHistory",MultiplierList)
 
   socket.on('disconnect', () => console.log('Client disconnected'));
   //Start Chrono
@@ -85,6 +87,8 @@ io.on("connection", (socket) => {
       if (crash == 1 || crash == 0) {
         clearTimeout(timer);
         io.emit("canBet", true);
+        MultiplierList.push(time)
+        io.emit("multiplierHistory",MultiplierList)
         waitForNext();
         isCrash = true;
       }
@@ -156,12 +160,18 @@ io.on("connection", (socket) => {
       UserList.map(userData  => {
          if(userData.name==user){
           socket.emit("setUserData", {username:user,money:userData.money});
+          socket.emit("chats", ChatList);
+          socket.emit("bets", BetList);
+          socket.emit("multiplierHistory",MultiplierList)
          }
       })
     // Sinon l'argent est fixé à 100
     }else{
       UserList.push({name:user,money:100})
       socket.emit("setUserData", {username:user,money:100});
+      socket.emit("chats", ChatList);
+      socket.emit("bets", BetList);
+      socket.emit("multiplierHistory",MultiplierList)
     }
   });
 });

@@ -12,7 +12,7 @@ export class BetsService {
   readyToPlay = this.socket.fromEvent<boolean>('connected');
   bets =  this.socket.fromEvent<BetRecord[]>('bets');
   error =  this.socket.fromEvent<string>('errorbet');
-
+  multiplierHistory = this.socket.fromEvent<string[]>('multiplierHistory')
   constructor(public socket: Socket) {}
 
   public sendBet(bet:BetRecord){

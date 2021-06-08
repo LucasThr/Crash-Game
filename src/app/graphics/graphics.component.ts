@@ -24,7 +24,7 @@ export class GraphicsComponent implements OnInit {
   chronoBar!:number;
   barLenght!:number
   timeToShow:string='1.00'
-  test:string[]=["d","d","d","e","d","d","d"]
+  multiplierHistory:string[]=[]
   constructor(public betService: BetsService,
     public userService: UserService
     ) {
@@ -136,6 +136,13 @@ export class GraphicsComponent implements OnInit {
     this.betService.error.subscribe((error)=>{
       this.error=error
     })
+
+    //Recupere la liste des multiplicateur precedent
+    this.betService.multiplierHistory.subscribe((multi)=>{
+      this.multiplierHistory=multi
+    })
+
+
 
     //On recupere les informations de l'utilisateur : nom .. money ...
     this.userService.userData.subscribe((userData) =>{
