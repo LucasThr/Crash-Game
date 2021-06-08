@@ -44,6 +44,21 @@ export class GraphicsComponent implements OnInit {
     this.money = Number((this.money + time * this.mise).toFixed(2));
   }
 
+  changeColorOfMulti(multi:string):string{
+    let colors=['yellow','red','green','blue','purple']
+    // console.log(multi.toString().slice(-1))
+    let num=Number(multi)
+    let ran:number=0
+    if (num>1.30) ran=3
+    if (num>1.60) ran=2
+    if (num>1.90) ran=4
+    if (num>2.30) ran=1
+
+
+    
+    return colors[ran]
+  }
+
   addBet(initial: number, value: number, isLose?: boolean) {
     this.betService.sendBet({
       user:this.username,

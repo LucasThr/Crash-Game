@@ -62,7 +62,7 @@
 
   <div class="relative flex shadow justify-center overflow-hidden items-center h-48 md:h-64 w-full rounded-t bg-gray-1000 md:border-l-2 border-gray-600">
     <div  class="no-scrollbar flex w-full overflow-x-scroll overscroll-x-auto absolute top-0 left-0 text-white mt-2 mx-1">
-      <div *ngFor="let multi of multiplierHistory.slice().reverse()" class="mx-1 px-2 py-1 border border-green-400 bg-green-300 bg-opacity-25 rounded-xl">
+      <div *ngFor="let multi of multiplierHistory.slice().reverse()" class="mx-1 px-2 py-1 border  border-{{changeColorOfMulti(multi)}}-400 bg-{{changeColorOfMulti(multi)}}-300 bg-opacity-25 rounded-xl">
         x{{multi}}
       </div>
     </div>
