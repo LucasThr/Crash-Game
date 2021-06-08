@@ -1,0 +1,18 @@
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.bg-gray-1000{
+    background-color: #1d2237;
+}
+
+.bg-gray-1100{
+    background-color: #151d31;
+}
+
+.bg-gray-1200{
+    background-color: #0e111c;
+}
+
+
+

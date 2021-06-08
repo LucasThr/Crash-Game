@@ -24,6 +24,7 @@ export class GraphicsComponent implements OnInit {
   chronoBar!:number;
   barLenght!:number
   timeToShow:string='1.00'
+  test:string[]=["d","d","d","e","d","d","d"]
   constructor(public betService: BetsService,
     public userService: UserService
     ) {
@@ -68,6 +69,13 @@ export class GraphicsComponent implements OnInit {
 
   fixedDecimal(number: number): number {
     return Number(number.toFixed(2));
+  }
+
+  getDecimalWithZero(number:number):string{
+    let display:string
+    display= number.toString()
+    display=Number.parseFloat(display).toFixed(2)
+    return display
   }
 
   getCurrentTime(){

@@ -1,5 +1,5 @@
-<div  *ngIf="user && connected" class="min-h-screen h-full w-full bg-gray-700">
-  <nav class="bg-gray-800">
+<div  *ngIf="user && connected" class="min-h-screen h-full w-full bg-gray-1200">
+  <nav class="bg-gray-1000">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -37,7 +37,7 @@
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Crash</a>
+              <a href="#" class="bg-gray-1000 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Crash</a>
   
               <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Blackjack</a>
   
@@ -69,12 +69,12 @@
   <!-- <app-userheadbar class=""></app-userheadbar> -->
   
   <!-- <app-bet class="w-full md:w-96"></app-bet> -->
-  <div class="md:flex mt-8 lg:mt-0">
+  <div class="md:flex mt-4 lg:mt-0">
     <app-graphics class="w-9/12"></app-graphics>
     <app-chat class="w-3/12"></app-chat>
   </div>
 </div>
-<div *ngIf="!user || !connected" class="flex flex-col justify-center items-center  h-screen w-full bg-gray-700">
+<div *ngIf="!user || !connected" class="flex flex-col justify-center items-center  h-screen w-full bg-gray-1000">
     <div class="text-xl text-white font-bold mb-6"> Entrer votre pseudo</div>
     <input
     class="py-1 px-2 appearance-none h-8 w-2/3 rounded-l border-r-2 border-gray-600"
@@ -84,6 +84,6 @@
     (click)="setName()"
     class="bg-green-500 mt-4 px-4 py-2 rounded">Continuer</button>
   </div> 
-<footer class="h-10 w-full flex justify-center items-center bg-gray-800 text-gray-400 text-sm">
+<footer class="h-10 w-full flex justify-center items-center bg-gray-1000 text-gray-400 text-sm">
 @2021 - LucasThr
 </footer>
